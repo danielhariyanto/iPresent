@@ -16,9 +16,8 @@
             <input type="hidden" name="key">
             <input type="hidden" name="success_action_redirect" value="http:/localhost:5000/results">
             <input type="file" name="file" accept="audio/wav">
-            <input type="submit" value="Upload Presentation">
+            <input id="form-submit" type="submit" value="Upload Presentation">
         </form>
-        <div class="loader"></div>
     </div>
 
     <script>
@@ -26,6 +25,11 @@
         window.onload = function addFileName() {
             document.getElementsByName("key")[0].setAttribute("value", filename);
         }
+        const loader = '<div class="loader"></div>'
+        document.getElementById("form-submit").addEventListener('onclick', function(){
+            console.log("clicked");
+            document.querySelector('.upload').insertAdjacentHTML('beforeend', loader);
+        })
     </script>
 </body>
 </html>
