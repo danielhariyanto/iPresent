@@ -14,8 +14,8 @@
     </form>
     <script>
         var filename = new Date().toISOString()+".wav";
-        function addFileName() {
-            document.getElementsByName("key").setAttribute("value", filename);
+        window.onload = function addFileName() {
+            document.getElementsByName("key")[0].setAttribute("value", filename);
         }
     </script>
 </body>
