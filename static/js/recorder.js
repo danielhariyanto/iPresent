@@ -12,15 +12,11 @@ var audioContext //audio context to help us record
 var recordButton = document.getElementById("recordButton");
 var stopButton = document.getElementById("stopButton");
 var pauseButton = document.getElementById("pauseButton");
-const recording = false;
 
 //add events to those 2 buttons
-recording ?
-    recordButton.addEventListener("click", pauseRecording) :
-    recordButton.addEventListener("click", startRecording);
-
+recordButton.addEventListener("click", pauseRecording);
+recordButton.addEventListener("click", startRecording);
 stopButton.addEventListener("click", stopRecording);
-//pauseButton.addEventListener("click", pauseRecording);
 
 function startRecording() {
     console.log("recordButton clicked");
@@ -138,11 +134,7 @@ function createDownloadLink(blob) {
     link.download = filename + ".wav"; //download forces the browser to download the file using the filename
     link.click();
 
-    var filenameLoc = prompt(
-        "We will be uploading your recording to the cloud. If you consent, please input the downloaded file location. Ex: /Users/danielhariyanto/Downloads/2021-01-16T03 52 40.058Z.wav"
-    )
-
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", "/upload", true);
-    xhr.send(filenameLoc);
+    var next = document.createElement('a');
+    next.href = "/upload";
+    next.click();
 }
