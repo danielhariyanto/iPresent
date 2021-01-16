@@ -2,6 +2,12 @@ $primarycolor: #171717;
 $secondarycolor: #d66fd8;
 $tertiarycolor: #8939c3;
 
+@mixin setup-font {
+	font-family: obviously, sans-serif;
+	font-weight: 400;
+	font-style: normal;
+}
+
 html,
 body,
 h1,
@@ -191,6 +197,43 @@ a {
 			&:hover {
 				transition: background-color 0.2s;
 				background-color: $tertiarycolor;
+			}
+		}
+	}
+}
+
+.upload {
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	h1 {
+		text-align: center;
+		line-height: 100%;
+	}
+	&__form {
+		margin-top: 5vh;
+		border: solid 4px $secondarycolor;
+		border-radius: 20px;
+		color: #fff;
+		padding: 10px 20px;
+		input {
+			@include setup-font();
+		}
+		input[type='filepath'] {
+			width: 400px;
+		}
+		input[type='submit'] {
+			border: none;
+			border-radius: 20px;
+			padding: 5px 10px;
+			cursor: pointer;
+			outline: none;
+			@include setup-font();
+			&:hover {
+				transition: background-color 0.2s;
+				background-color: $secondarycolor;
 			}
 		}
 	}
