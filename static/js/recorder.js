@@ -149,7 +149,7 @@ function createDownloadLink(blob) {
     var link = document.createElement('a');
 
     //name of .wav file to use during upload and download (without extendion)
-    var filename = "YourPresentation";
+    var filename = "iPresent_YourRecording";
 
     //add controls to the <audio> element
     au.controls = true;
