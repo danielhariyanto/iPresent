@@ -10,18 +10,18 @@
 <body>
     <div class="upload">
         <h1>upload the <br/>audio file</h1>
-        <form class="upload__form" action="https://storage.googleapis.com/hack_the_ne" method="post" enctype="multipart/form-data">
+        <form action="https://storage.googleapis.com/hack_the_ne/" method="POST" enctype="multipart/form-data">
             <input type="hidden" name="key">
-            <input type="hidden" name="success_action_redirect" value="/results">
-            <input type="file" accept="audio/wav" name="file">
+            <input type="hidden" name="success_action_redirect" value="http:/localhost:5000/results">
+            <input type="file" name="file" accept="audio/wav">
             <input type="submit" value="Upload Presentation">
         </form>
     </div>
 
     <script>
         var filename = new Date().toISOString()+".wav";
-        function addFileName() {
-            document.getElementsByName("key").setAttribute("value", filename);
+        window.onload = function addFileName() {
+            document.getElementsByName("key")[0].setAttribute("value", filename);
         }
     </script>
 </body>

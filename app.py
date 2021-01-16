@@ -7,42 +7,19 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
-@app.route('/present', methods=['GET', 'POST'])
+@app.route('/present', methods=['GET'])
 def start():
     #return render_template("testaudio.html")
     return render_template("present.html")
 
-@app.route('/upload', methods=['GET'])
+@app.route('/upload', methods=['GET', 'POST'])
 def upload():
     return render_template("upload.html")
 
-@app.route('/metrics', methods=['GET'])
-def metrics():
-    return render_template("metrics.html")
-
-@app.route('/results', methods=['GET','POST'])
+@app.route('/results', methods=['GET'])
 def results():
-    if request.method == 'POST':
-        file = request.form['file-upload']
-        filepath = request.form['file-path']
+    #algorithms go here
 
-        bucket_name = "hack_the_ne"
-        source_file_name = filepath+"/"+file
-        destination_blob_name = file
-
-        storage_client = storage.Client()
-        bucket = storage_client.bucket(bucket_name)
-        blob = bucket.blob(destination_blob_name)
-
-        blob.upload_from_filename(source_file_name)
-
-        print(
-            "File {} uploaded to {}.".format(
-                source_file_name, destination_blob_name
-            )
-        )
-    else:
-        return redirect("/upload")
     return render_template("metrics.html")
 
 
