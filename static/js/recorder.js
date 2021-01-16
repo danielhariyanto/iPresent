@@ -14,14 +14,19 @@ var audioContext //audio context to help us record
 var recordButton = document.getElementById("recordButton");
 var stopButton = document.getElementById("stopButton");
 var pauseButton = document.getElementById("pauseButton");
+const recording = false;
 
 //add events to those 2 buttons
+recording ? 
+recordButton.addEventListener("click", pauseRecording) : 
 recordButton.addEventListener("click", startRecording);
+
 stopButton.addEventListener("click", stopRecording);
-pauseButton.addEventListener("click", pauseRecording);
+//pauseButton.addEventListener("click", pauseRecording);
 
 function startRecording() {
     console.log("recordButton clicked");
+    recording = true;
 
     /*
         Simple constraints object, for more advanced audio features see
@@ -87,11 +92,11 @@ function pauseRecording(){
     if (rec.recording){
         //pause
         rec.stop();
-        pauseButton.innerHTML="Resume";
+        recordButton.innerHTML="<ion-icon name='mic-off'></ion-icon>";
     }else{
         //resume
         rec.record()
-        pauseButton.innerHTML="Pause";
+        pauseButton.innerHTML="<ion-icon name='mic'></ion-icon>";
 
     }
 }

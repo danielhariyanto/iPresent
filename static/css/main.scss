@@ -1,0 +1,126 @@
+$primarycolor: #171717;
+$secondarycolor: #be8ee1;
+
+html,
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+button {
+	margin: 0;
+	padding: 0;
+	border: none;
+	outline: none;
+	box-sizing: border-box;
+}
+
+body {
+	background-color: $primarycolor;
+	height: 100vh;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+button,
+ul li {
+	font-family: obviously-wide, sans-serif;
+	font-weight: 600;
+	font-style: normal;
+	color: #fff;
+}
+
+h1 {
+	font-size: 3rem;
+}
+
+.window {
+	position: relative;
+	margin: 20vh 20vw;
+	border: solid 4px $secondarycolor;
+	border-radius: 30px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 60vh;
+	button {
+		margin-left: 20px;
+		background-color: $secondarycolor;
+		padding: 15px 30px;
+		border-radius: 30px;
+		font-size: 1rem;
+		line-height: 160%;
+		text-align: left;
+		h2 {
+			color: $primarycolor;
+		}
+	}
+	.circle {
+		height: 30px;
+		width: 30px;
+		background-color: $secondarycolor;
+		border-radius: 15px;
+		position: absolute;
+		top: 20px;
+		right: 20px;
+	}
+}
+
+.present {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	h1 {
+		font-weight: 800;
+		padding: 10vh;
+		height: 5vh;
+	}
+	.zoom-grid {
+		height: 50vh;
+		display: grid;
+		grid-template-columns: 1fr 1fr 1fr;
+		gap: 20px;
+		align-items: center;
+	}
+	.panel {
+		width: 300px;
+		border: solid 3px $secondarycolor;
+		border-radius: 10px;
+		height: 20vh;
+	}
+
+	#recordButton {
+		.mic-icon {
+			font-size: 3rem;
+		}
+		height: 75px;
+		width: 75px;
+		border-radius: 45px;
+		color: $primarycolor;
+		background-color: $secondarycolor;
+	}
+	#stopButton {
+		position: absolute;
+		right: 10vw;
+		border-radius: 20px;
+		padding: 10px 20px;
+		padding-bottom: 20px;
+		font-size: 1.5rem;
+		text-align: left;
+		line-height: 100%;
+		color: $primarycolor;
+		cursor: pointer;
+		&:hover {
+			transition: background-color 0.2s;
+			background-color: $secondarycolor;
+		}
+	}
+}
