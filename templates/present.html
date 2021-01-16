@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Presenting... | iPresent</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://use.typekit.net/ucs8hfr.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../static/css/main.css">
+  </head>
+  <body class="present">
+    <h1>you got this...</h1>
+    <div class="zoom-grid">
+		<div class="panel"></div>
+		<div class="panel"></div>
+		<div class="panel"></div>
+
+	</div>
+    <div id="controls">
+     <button id="recordButton"><ion-icon class="mic-icon" name="mic"></ion-icon></button>
+     <button id="pauseButton" disabled>Pause</button>
+     <button id="stopButton" disabled>LEAVE<br/>MEETING</button>
+    </div>
+    <div id="formats">Format: start recording to see sample rate</div>
+    <p><strong>Recordings:</strong></p>
+    <ol id="recordingsList"></ol>
+	<!-- inserting these scripts at the end to be able to use all the elements in the DOM -->
+	<script src="https://unpkg.com/ionicons@5.2.3/dist/ionicons.js"></script>
+    <script src="https://cdn.rawgit.com/mattdiamond/Recorderjs/08e7abd9/dist/recorder.js"></script>
+    <script src="/static/js/recorder.js"></script>
+  </body>
+</html>
