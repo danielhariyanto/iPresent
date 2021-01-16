@@ -21,6 +21,17 @@ def upload():
 def results():
     #algorithms go here
 
+    """Deletes a blob from the bucket after algorithms"""
+    bucket_name = request.args.get("bucket")
+    blob_name = request.args.get("key")
+
+    storage_client = storage.Client()
+
+    bucket = storage_client.bucket(bucket_name)
+    blob = bucket.blob(blob_name)
+    blob.delete()
+
+    print("Blob {} deleted.".format(blob_name))
     return render_template("metrics.html")
 
 
