@@ -1,5 +1,3 @@
-var upload = import("./upload");
-
 //webkitURL is deprecated but nevertheless
 URL = window.URL || window.webkitURL;
 
@@ -17,9 +15,9 @@ var pauseButton = document.getElementById("pauseButton");
 const recording = false;
 
 //add events to those 2 buttons
-recording ? 
-recordButton.addEventListener("click", pauseRecording) : 
-recordButton.addEventListener("click", startRecording);
+recording ?
+    recordButton.addEventListener("click", pauseRecording) :
+    recordButton.addEventListener("click", startRecording);
 
 stopButton.addEventListener("click", stopRecording);
 //pauseButton.addEventListener("click", pauseRecording);
@@ -33,7 +31,7 @@ function startRecording() {
         https://addpipe.com/blog/audio-constraints-getusermedia/
     */
 
-    var constraints = { audio: true, video:false }
+    var constraints = { audio: true, video: false }
 
     /*
         Disable the record button until we get a success or fail from getUserMedia() 
@@ -48,7 +46,7 @@ function startRecording() {
         https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia
     */
 
-    navigator.mediaDevices.getUserMedia(constraints).then(function(stream) {
+    navigator.mediaDevices.getUserMedia(constraints).then(function (stream) {
         console.log("getUserMedia() success, stream created, initializing Recorder.js ...");
 
         /*
@@ -60,7 +58,7 @@ function startRecording() {
         audioContext = new AudioContext();
 
         //update the format 
-        document.getElementById("formats").innerHTML="Format: 1 channel pcm @ "+audioContext.sampleRate/1000+"kHz"
+        document.getElementById("formats").innerHTML = "Format: 1 channel pcm @ " + audioContext.sampleRate / 1000 + "kHz"
 
         /*  assign to gumStream for later use  */
         gumStream = stream;
@@ -72,14 +70,14 @@ function startRecording() {
             Create the Recorder object and configure to record mono sound (1 channel)
             Recording 2 channels  will double the file size
         */
-        rec = new Recorder(input,{numChannels:1})
+        rec = new Recorder(input, { numChannels: 1 })
 
         //start the recording process
         rec.record()
 
         console.log("Recording started");
 
-    }).catch(function(err) {
+    }).catch(function (err) {
         //enable the record button if getUserMedia() fails
         recordButton.disabled = false;
         stopButton.disabled = true;
@@ -87,16 +85,16 @@ function startRecording() {
     });
 }
 
-function pauseRecording(){
-    console.log("pauseButton clicked rec.recording=",rec.recording );
-    if (rec.recording){
+function pauseRecording() {
+    console.log("pauseButton clicked rec.recording=", rec.recording);
+    if (rec.recording) {
         //pause
         rec.stop();
-        recordButton.innerHTML="<ion-icon name='mic-off'></ion-icon>";
-    }else{
+        recordButton.innerHTML = "<ion-icon name='mic-off'></ion-icon>";
+    } else {
         //resume
         rec.record()
-        pauseButton.innerHTML="<ion-icon name='mic'></ion-icon>";
+        pauseButton.innerHTML = "<ion-icon name='mic'></ion-icon>";
 
     }
 }
@@ -110,7 +108,7 @@ function stopRecording() {
     pauseButton.disabled = true;
 
     //reset button just in case the recording is stopped while paused
-    pauseButton.innerHTML="Pause";
+    pauseButton.innerHTML = "Pause";
 
     //tell the recorder to stop the recording
     rec.stop();
@@ -137,12 +135,14 @@ function createDownloadLink(blob) {
 
     //save to disk link
     link.href = url;
-    link.download = filename+".wav"; //download forces the browser to download the file using the filename
+    link.download = filename + ".wav"; //download forces the browser to download the file using the filename
     link.click();
 
     var filenameLoc = prompt(
-        "We will be uploading your recording to the cloud. If you consent, please input the downloaded file location. Ex: /Users/danielhariyanto/Downloads/2021-01-16T02 00 32.390Z.wav"
+        "We will be uploading your recording to the cloud. If you consent, please input the downloaded file location. Ex: /Users/danielhariyanto/Downloads/2021-01-16T03 52 40.058Z.wav"
     )
 
-    upload(filenameLoc);
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "/upload", true);
+    xhr.send(filenameLoc);
 }
