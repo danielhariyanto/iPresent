@@ -12,18 +12,19 @@ var audioContext //audio context to help us record
 var recordButton = document.getElementById("recordButton");
 var stopButton = document.getElementById("stopButton");
 var pauseButton = document.getElementById("pauseButton");
-const recording = false;
 
 //add events to those 2 buttons
-recording ?
-    recordButton.addEventListener("click", pauseRecording) :
-    recordButton.addEventListener("click", startRecording);
+recordButton.addEventListener("click", startRecording);
+stopButton.addEventListener("click", (stopRecording));
+pauseButton.addEventListener("click", pauseRecording);
 
-stopButton.addEventListener("click", stopRecording);
-//pauseButton.addEventListener("click", pauseRecording);
+var durationLabel = document.getElementById("duration");
+let isPaused = false;
+let totalSeconds = 0;
 
 function startRecording() {
     console.log("recordButton clicked");
+    setInterval(incrementDuration, 1000);
     recording = true;
 
     /*
@@ -58,7 +59,7 @@ function startRecording() {
         audioContext = new AudioContext();
 
         //update the format 
-        document.getElementById("formats").innerHTML = "Format: 1 channel pcm @ " + audioContext.sampleRate / 1000 + "kHz"
+        //document.getElementById("formats").innerHTML = "Format: 1 channel pcm @ " + audioContext.sampleRate / 1000 + "kHz"
 
         /*  assign to gumStream for later use  */
         gumStream = stream;
@@ -87,14 +88,17 @@ function startRecording() {
 
 function pauseRecording() {
     console.log("pauseButton clicked rec.recording=", rec.recording);
+    isPaused = !isPaused;
     if (rec.recording) {
         //pause
         rec.stop();
-        recordButton.innerHTML = "<ion-icon name='mic-off'></ion-icon>";
+        pauseButton.innerHTML = "Resume";
+        recordButton.innerHTML = "<ion-icon class='mic-icon' name='mic-off'></ion-icon>";
     } else {
         //resume
         rec.record()
-        pauseButton.innerHTML = "<ion-icon name='mic'></ion-icon>";
+        pauseButton.innerHTML = "Pause";
+        recordButton.innerHTML = "<ion-icon class='mic-icon' name='mic'></ion-icon>";
 
     }
 }
@@ -118,6 +122,25 @@ function stopRecording() {
 
     //create the wav blob and pass it on to createDownloadLink
     rec.exportWAV(createDownloadLink);
+}
+
+function incrementDuration() {
+    let secondsLabel = '0';
+    let minutesLabel = '0';
+    if (!isPaused) {
+        totalSeconds++;
+        if (totalSeconds % 60 < 10) {
+            secondsLabel = `0${totalSeconds % 60}`;
+        } else {
+            secondsLabel = `${totalSeconds % 60}`
+        }
+        if (Math.floor(totalSeconds / 60) < 10) {
+            minutesLabel = `0${Math.floor(totalSeconds / 60) / 10}`;
+        } else {
+            minutesLabel = `${Math.floor(totalSeconds / 60) < 10}`
+        }
+        durationLabel.innerHTML = `<h2>${minutesLabel}:${secondsLabel}</h2>`;
+    }
 }
 
 function createDownloadLink(blob) {

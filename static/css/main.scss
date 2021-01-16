@@ -1,5 +1,6 @@
 $primarycolor: #171717;
-$secondarycolor: #be8ee1;
+$secondarycolor: #d66fd8;
+$tertiarycolor: #8939c3;
 
 html,
 body,
@@ -10,7 +11,8 @@ h4,
 h5,
 h6,
 p,
-button {
+button,
+a {
 	margin: 0;
 	padding: 0;
 	border: none;
@@ -31,15 +33,42 @@ h5,
 h6,
 p,
 button,
-ul li {
+ul li,
+a {
 	font-family: obviously-wide, sans-serif;
-	font-weight: 600;
 	font-style: normal;
 	color: #fff;
 }
 
+h1,
+h2 {
+	font-weight: 600;
+}
+
 h1 {
 	font-size: 3rem;
+}
+
+h2 {
+	font-size: 5rem;
+}
+
+h3 {
+	font-size: 1.5rem;
+	line-height: 110%;
+}
+
+p {
+	font-size: 0.8rem;
+	font-weight: 400;
+}
+
+button {
+	cursor: pointer;
+}
+
+a {
+	text-decoration: none;
 }
 
 .window {
@@ -51,18 +80,6 @@ h1 {
 	align-items: center;
 	justify-content: center;
 	height: 60vh;
-	button {
-		margin-left: 20px;
-		background-color: $secondarycolor;
-		padding: 15px 30px;
-		border-radius: 30px;
-		font-size: 1rem;
-		line-height: 160%;
-		text-align: left;
-		h2 {
-			color: $primarycolor;
-		}
-	}
 	.circle {
 		height: 30px;
 		width: 30px;
@@ -71,6 +88,23 @@ h1 {
 		position: absolute;
 		top: 20px;
 		right: 20px;
+	}
+}
+
+.join-button {
+	margin-left: 20px;
+	background-color: $secondarycolor;
+	padding: 15px 20px 20px 20px;
+	border-radius: 30px;
+	font-size: 1rem;
+	line-height: 110%;
+	text-align: left;
+	color: $primarycolor;
+	font-size: 1.5rem;
+	font-weight: 700;
+	&:hover {
+		transition: background-color 0.2s;
+		background-color: $tertiarycolor;
 	}
 }
 
@@ -86,7 +120,9 @@ h1 {
 	.zoom-grid {
 		height: 50vh;
 		display: grid;
+		padding: 5vh 0;
 		grid-template-columns: 1fr 1fr 1fr;
+		grid-template-rows: 1fr 1fr;
 		gap: 20px;
 		align-items: center;
 	}
@@ -94,33 +130,113 @@ h1 {
 		width: 300px;
 		border: solid 3px $secondarycolor;
 		border-radius: 10px;
-		height: 20vh;
+		height: 100%;
+		box-shadow: 0 8px 15px 0 rgba(0, 0, 0, 0.5);
 	}
-
-	#recordButton {
-		.mic-icon {
-			font-size: 3rem;
+	#controls {
+		width: 60vw;
+		display: flex;
+		justify-content: flex-start;
+		#duration {
+			height: 100%;
+			width: 220px;
+			color: $secondarycolor;
+			border: solid 5px $secondarycolor;
+			border-radius: 50px;
+			line-height: 2px;
+			h2 {
+				padding: 30px 20px 0 20px;
+				height: 0%;
+				text-align: center;
+				font-size: 2.4rem;
+			}
 		}
-		height: 75px;
-		width: 75px;
-		border-radius: 45px;
-		color: $primarycolor;
-		background-color: $secondarycolor;
-	}
-	#stopButton {
-		position: absolute;
-		right: 10vw;
-		border-radius: 20px;
-		padding: 10px 20px;
-		padding-bottom: 20px;
-		font-size: 1.5rem;
-		text-align: left;
-		line-height: 100%;
-		color: $primarycolor;
-		cursor: pointer;
-		&:hover {
-			transition: background-color 0.2s;
+		.button {
+			.mic-icon {
+				font-size: 3rem;
+			}
+			height: 75px;
+			width: 75px;
+			border-radius: 45px;
+			color: $primarycolor;
 			background-color: $secondarycolor;
+			&:hover {
+				transition: background-color 0.2s;
+				background-color: $tertiarycolor;
+			}
+		}
+		#recordButton {
+			width: 200px;
+			font-size: 2rem;
+			font-weight: 700;
+		}
+		#stopButton {
+			position: absolute;
+			right: 20vw;
+			border-radius: 20px;
+			padding: 10px 20px;
+			padding-bottom: 20px;
+			font-size: 1.5rem;
+			text-align: left;
+			line-height: 100%;
+			color: $primarycolor;
+			cursor: pointer;
+			&:hover {
+				transition: background-color 0.2s;
+				background-color: $tertiarycolor;
+			}
 		}
 	}
+}
+
+.metrics {
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	h1 {
+		margin-bottom: 10vh;
+	}
+	&-grid {
+		display: grid;
+		grid-template-columns: 1fr 1fr 1fr;
+		gap: 30px;
+		margin-bottom: 50px;
+		&__card {
+			height: 350px;
+			width: 250px;
+			padding: 20px;
+			background-color: $primarycolor;
+			border: 4px solid $secondarycolor;
+			border-radius: 20px;
+			box-shadow: 0 8px 15px 0 rgba(0, 0, 0, 0.25);
+			h2 {
+				line-height: 120%;
+				color: $secondarycolor;
+			}
+			h3 {
+				font-weight: 500;
+				padding-bottom: 1rem;
+				color: $secondarycolor;
+			}
+			p {
+				width: 80%;
+				font-weight: 400;
+			}
+		}
+	}
+}
+
+.gradient-bg {
+	position: absolute;
+	top: 35vh;
+	width: 100vw;
+	height: 30vh;
+	z-index: -999;
+	background-image: linear-gradient(
+		to bottom right,
+		$secondarycolor,
+		$tertiarycolor
+	);
 }
