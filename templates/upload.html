@@ -3,15 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://use.typekit.net/ucs8hfr.css">
+    <link rel="stylesheet" href="../static/css/main.css">
     <title>Upload Your File | iPresent</title>
 </head>
 <body>
-    <form action="https://storage.googleapis.com/hack_the_ne/" method="POST" enctype="multipart/form-data">
-        <input type="hidden" name="key">
-        <input type="hidden" name="success_action_redirect" value="http:/localhost:5000/results">
-        <input type="file" name="file" accept="audio/wav">
-        <input type="submit" value="Upload Presentation">
-    </form>
+    <div class="upload">
+        <h1>upload the <br/>audio file</h1>
+        <form action="https://storage.googleapis.com/hack_the_ne/" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="key">
+            <input type="hidden" name="success_action_redirect" value="http:/localhost:5000/results">
+            <input type="file" name="file" accept="audio/wav">
+            <input type="submit" value="Upload Presentation">
+        </form>
+    </div>
+
     <script>
         var filename = new Date().toISOString()+".wav";
         window.onload = function addFileName() {
