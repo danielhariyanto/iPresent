@@ -1,3 +1,5 @@
+var upload = import("./upload");
+
 //webkitURL is deprecated but nevertheless
 URL = window.URL || window.webkitURL;
 
@@ -119,7 +121,6 @@ function createDownloadLink(blob) {
 
     var url = URL.createObjectURL(blob);
     var au = document.createElement('audio');
-    var li = document.createElement('li');
     var link = document.createElement('a');
 
     //name of .wav file to use during upload and download (without extendion)
@@ -131,37 +132,12 @@ function createDownloadLink(blob) {
 
     //save to disk link
     link.href = url;
-    link.download = filename+".wav"; //download forces the browser to donwload the file using the  filename
-    link.innerHTML = "Save to disk";
+    link.download = filename+".wav"; //download forces the browser to download the file using the filename
+    link.click();
 
-    //add the new audio element to li
-    li.appendChild(au);
+    var filenameLoc = prompt(
+        "We will be uploading your recording to the cloud. If you consent, please input the downloaded file location. Ex: /Users/danielhariyanto/Downloads/2021-01-16T02 00 32.390Z.wav"
+    )
 
-    //add the filename to the li
-    li.appendChild(document.createTextNode(filename+".wav "))
-
-    //add the save to disk link to li
-    li.appendChild(link);
-
-    //upload link
-    var upload = document.createElement('a');
-    upload.href="#";
-    upload.innerHTML = "Upload";
-    upload.addEventListener("click", function(event){
-          var xhr=new XMLHttpRequest();
-          xhr.onload=function(e) {
-              if(this.readyState === 4) {
-                  console.log("Server returned: ",e.target.responseText);
-              }
-          };
-          var fd=new FormData();
-          fd.append("audio_data",blob, filename);
-          xhr.open("POST","/",true);
-          xhr.send(fd);
-    })
-    li.appendChild(document.createTextNode (" "))//add a space in between
-    li.appendChild(upload)//add the upload link to li
-
-    //add the li element to the ol
-    recordingsList.appendChild(li);
+    upload(filenameLoc);
 }

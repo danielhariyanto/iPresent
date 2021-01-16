@@ -6,17 +6,9 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
-@app.route('start', methods=['GET', 'POST'])
+@app.route('/start', methods=['GET', 'POST'])
 def start():
-    if request.method == "POST":
-        f = request.files['audio_data']
-        with open('audio.wav', 'wb') as audio:
-            f.save(audio)
-        print('file uploaded successfully')
-
-        return render_template('present.html', request="POST")
-    else:
-        return render_template("present.html")
+    return render_template("present.html")
 
 
 if __name__ == "__main__":
