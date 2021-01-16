@@ -3,11 +3,9 @@ from google.cloud import storage
 
 app = Flask(__name__)
 
-
 @app.route('/', methods=['GET'])
 def index():
     return render_template('index.html')
-
 
 @app.route('/present', methods=['GET', 'POST'])
 def start():
@@ -17,6 +15,10 @@ def start():
 @app.route('/upload', methods=['GET'])
 def upload():
     return render_template("upload.html")
+
+@app.route('/metrics', methods=['GET'])
+def metrics():
+    return render_template("metrics.html")
 
 @app.route('/results', methods=['GET','POST'])
 def results():
