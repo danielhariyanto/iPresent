@@ -1,13 +1,15 @@
-{% extends 'base.html' %}
-
-{% block head %}
-<title>iPresent</title>
-{% endblock %}
-
-{% block body %}
-<form action="/results" method="POST">
-    <input type="file" accept="audio/wav" name="file-upload" id="file-upload">
-    <input type="text" placeholder="ex. /Users/<username>/Downloads" name="file-path" id="file-path">
-    <input type="submit" value="Upload Presentation" name="submit">
-</form>
-{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Your File | iPresent</title>
+</head>
+<body>
+    <form action="/results" method="POST">
+        <input type="file" accept="audio/wav" name="file-upload" id="file-upload">
+        <input type="text" placeholder="ex. /Users/<username>/Downloads" name="file-path" id="file-path">
+        <input type="submit" value="Upload Presentation" name="submit">
+    </form>
+</body>
+</html>
