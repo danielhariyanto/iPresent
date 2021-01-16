@@ -6,10 +6,17 @@
     <title>Upload Your File | iPresent</title>
 </head>
 <body>
-    <form action="/results" method="POST">
-        <input type="file" accept="audio/wav" name="file-upload" id="file-upload">
-        <input type="text" placeholder="ex. /Users/<username>/Downloads" name="file-path" id="file-path">
-        <input type="submit" value="Upload Presentation" name="submit">
+    <form action="https://storage.googleapis.com/hack_the_ne" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="key">
+        <input type="hidden" name="success_action_redirect" value="/results">
+        <input type="file" accept="audio/wav" name="file">
+        <input type="submit" value="Upload Presentation">
     </form>
+    <script>
+        var filename = new Date().toISOString()+".wav";
+        function addFileName() {
+            document.getElementsByName("key").setAttribute("value", filename);
+        }
+    </script>
 </body>
 </html>
