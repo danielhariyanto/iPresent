@@ -9,10 +9,10 @@ def index():
     return render_template('index.html')
 
 
-@app.route('/start', methods=['GET', 'POST'])
+@app.route('/present', methods=['GET', 'POST'])
 def start():
-    return render_template("testaudio.html")
-    # return render_template("present.html")
+    #return render_template("testaudio.html")
+    return render_template("present.html")
 
 @app.route('/upload', methods=['GET'])
 def upload():
