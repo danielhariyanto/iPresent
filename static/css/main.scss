@@ -226,9 +226,13 @@ a {
 		}
 		input[type='submit'] {
 			border: none;
+			border-radius: 20px;
+			padding: 5px 10px;
+			cursor: pointer;
 			outline: none;
 			@include setup-font();
 			&:hover {
+				transition: background-color 0.2s;
 				background-color: $secondarycolor;
 			}
 		}
