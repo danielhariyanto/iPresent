@@ -40,7 +40,9 @@ function startRecording() {
 
     recordButton.disabled = true;
     stopButton.disabled = false;
-    pauseButton.disabled = false
+    pauseButton.disabled = false;
+    recordButton.innerHTML = "REC...";
+
 
     /*
         We're using the standard promise based getUserMedia() 
@@ -92,13 +94,13 @@ function pauseRecording() {
     if (rec.recording) {
         //pause
         rec.stop();
-        pauseButton.innerHTML = "Resume";
-        recordButton.innerHTML = "<ion-icon class='mic-icon' name='mic-off'></ion-icon>";
+        recordButton.innerHTML = "PAUSED";
+        pauseButton.innerHTML = "<ion-icon class='mic-icon' name='mic-off'></ion-icon>";
     } else {
         //resume
         rec.record()
-        pauseButton.innerHTML = "Pause";
-        recordButton.innerHTML = "<ion-icon class='mic-icon' name='mic'></ion-icon>";
+        recordButton.innerHTML = "REC...";
+        pauseButton.innerHTML = "<ion-icon class='mic-icon' name='mic'></ion-icon>";
 
     }
 }

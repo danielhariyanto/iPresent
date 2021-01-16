@@ -155,16 +155,37 @@ a {
   height: 100%;
   -webkit-box-shadow: 0 8px 15px 0 rgba(0, 0, 0, 0.5);
           box-shadow: 0 8px 15px 0 rgba(0, 0, 0, 0.5);
-}
-
-.present #controls {
-  width: 60vw;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.present #controls {
+  width: 80vw;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+.present #controls > div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .present #controls #duration {
@@ -174,6 +195,7 @@ a {
   border: solid 5px #d66fd8;
   border-radius: 50px;
   line-height: 2px;
+  margin-right: 20px;
 }
 
 .present #controls #duration h2 {
@@ -202,14 +224,12 @@ a {
 }
 
 .present #controls #recordButton {
-  width: 200px;
+  width: 240px;
   font-size: 2rem;
   font-weight: 700;
 }
 
 .present #controls #stopButton {
-  position: absolute;
-  right: 20vw;
   border-radius: 20px;
   padding: 10px 20px;
   padding-bottom: 20px;
