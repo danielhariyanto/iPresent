@@ -288,6 +288,9 @@ a {
 
 .upload__form input[type='submit'] {
   border: none;
+  border-radius: 20px;
+  padding: 5px 10px;
+  cursor: pointer;
   outline: none;
   font-family: obviously, sans-serif;
   font-weight: 400;
@@ -295,6 +298,8 @@ a {
 }
 
 .upload__form input[type='submit']:hover {
+  -webkit-transition: background-color 0.2s;
+  transition: background-color 0.2s;
   background-color: #d66fd8;
 }
 
