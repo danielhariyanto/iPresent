@@ -17,9 +17,17 @@ a {
           box-sizing: border-box;
 }
 
+p {
+  font-family: obviously, sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
 body {
   background-color: #171717;
+  margin: 0;
   height: 100vh;
+  overflow-y: hidden;
 }
 
 h1,
@@ -69,10 +77,14 @@ a {
 }
 
 .window {
+  -webkit-transform: translateY(30%);
+          transform: translateY(30%);
   position: relative;
-  margin: 20vh 20vw;
+  margin: 0 20vw;
   border: solid 4px #d66fd8;
   border-radius: 30px;
+  -webkit-box-shadow: 0 8px 15px 0 rgba(0, 0, 0, 0.5);
+          box-shadow: 0 8px 15px 0 rgba(0, 0, 0, 0.5);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -82,7 +94,7 @@ a {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  height: 60vh;
+  height: 60%;
 }
 
 .window .circle {
@@ -93,6 +105,14 @@ a {
   position: absolute;
   top: 20px;
   right: 20px;
+}
+
+.landing-img {
+  position: absolute;
+  bottom: -50;
+  right: 20;
+  height: 80vh;
+  z-index: 999;
 }
 
 .join-button {
@@ -268,6 +288,16 @@ a {
   line-height: 100%;
 }
 
+.upload p {
+  font-family: obviously, sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  margin-top: 10px;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.5);
+  width: 500px;
+}
+
 .upload__form {
   margin-top: 5vh;
   border: solid 4px #d66fd8;
@@ -301,6 +331,39 @@ a {
   -webkit-transition: background-color 0.2s;
   transition: background-color 0.2s;
   background-color: #d66fd8;
+}
+
+.loader {
+  border: 10px solid #d66fd8;
+  border-top: 10px solid #8939c3;
+  border-radius: 50%;
+  margin-top: 20px;
+  width: 50px;
+  height: 50px;
+  -webkit-animation: spin 2s linear infinite;
+          animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
 }
 
 .metrics {

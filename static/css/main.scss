@@ -26,9 +26,17 @@ a {
 	box-sizing: border-box;
 }
 
+p {
+	font-family: obviously, sans-serif;
+	font-weight: 400;
+	font-style: normal;
+}
+
 body {
 	background-color: $primarycolor;
+	margin: 0;
 	height: 100vh;
+	overflow-y: hidden;
 }
 
 h1,
@@ -78,14 +86,16 @@ a {
 }
 
 .window {
+	transform: translateY(30%);
 	position: relative;
-	margin: 20vh 20vw;
+	margin: 0 20vw;
 	border: solid 4px $secondarycolor;
 	border-radius: 30px;
+	box-shadow: 0 8px 15px 0 rgba(0, 0, 0, 0.5);
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	height: 60vh;
+	height: 60%;
 	.circle {
 		height: 30px;
 		width: 30px;
@@ -95,6 +105,14 @@ a {
 		top: 20px;
 		right: 20px;
 	}
+}
+
+.landing-img {
+	position: absolute;
+	bottom: -50;
+	right: 20;
+	height: 80vh;
+	z-index: 999;
 }
 
 .join-button {
@@ -212,6 +230,13 @@ a {
 		text-align: center;
 		line-height: 100%;
 	}
+	p {
+		@include setup-font();
+		margin-top: 10px;
+		text-align: center;
+		color: rgba(255, 255, 255, 0.5);
+		width: 500px;
+	}
 	&__form {
 		margin-top: 5vh;
 		border: solid 4px $secondarycolor;
@@ -235,6 +260,25 @@ a {
 				transition: background-color 0.2s;
 				background-color: $secondarycolor;
 			}
+		}
+	}
+}
+
+.loader {
+	border: 10px solid $secondarycolor;
+	border-top: 10px solid $tertiarycolor;
+	border-radius: 50%;
+	margin-top: 20px;
+	width: 50px;
+	height: 50px;
+	animation: spin 2s linear infinite;
+
+	@keyframes spin {
+		0% {
+			transform: rotate(0deg);
+		}
+		100% {
+			transform: rotate(360deg);
 		}
 	}
 }
