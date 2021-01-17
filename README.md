@@ -50,7 +50,7 @@ The question we try to answer here is, “How many unnecessary filler words or p
 
 We compute a metric for brevity by creating two master lists containing sets of phrases or words that are commonly known in the english language as filler words. Using these lists, we iterate through the AI-generated **transcript,** and count the number of usages of each phrase. 
 
-**Cadence: How fast are you speaking? **
+**Cadence: How fast are you speaking?**
 
 We compute cadence by measuring the words / minute. Using the outputs from the Google Cloud Speech-to-Text API (abv. As GCST), we calculate both the number of words, and manually compute the duration of the audio file using GCST’s timestamps. 
 
