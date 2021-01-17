@@ -105,14 +105,14 @@ We ran this through a Dense neural network, but achieved low performance (around
 
 We then decided to analyze audio with a CNN, based on previous audio processing literature. This increased our performance substantially to an AUROC of ~0.79 on the binary classification task. 
 
-### Accomplishments that I'm proud of: 
+### Accomplishments that we're proud of: 
 * Trained three machine learning models (essentially three separate mini-projects) on three completely different modalities in such a short period of time, while having to familiarize ourselves with three different datasets. 
 * Our models performed very well, overall. 
 * Created a diverse suite of research-backed metrics that can be used to help our users analyze and improve their presentation skills
 * Implemented these models and algorithms into a meticulously designed web-based platform. 
 * Developed a visually appealing, interactive, and intuitive user interface to make the presentation simulations easy to use. 
 
-### What I learned: 
+### What we learned: 
 * After this Hackathon, our team feels very comfortable dealing with different types of data, ranging from audio files to text data. During the hackathon, we had the opportunity to practice feature engineering, normalization, train-test-split, and other common data preprocessing techniques. 
 * We learned about how audio files can be transformed into interpretable representations, and how certain features can be extracted from audio wav files. We then learned that we could use these representations to train a Convolutional Neural Network to perform our intended binary classification task of neutral vs. expressive. 
 * We learned more about the Word2Vec algorithm, and how Natural Language Processing techniques can be used to represent large chunks of text such as TED Talks into compressed feature vector representations used to train a model with high performance. 
