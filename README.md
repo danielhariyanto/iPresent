@@ -1,10 +1,13 @@
 # iPresent
 
+## Pitch Link
+https://www.youtube.com/watch?v=QQAM0No8Ou4&feature=youtu.be
+
 ## About Us
 * Daniel Hariyanto
 * Meshach Adoe
-* Sidney Jaury 
-* Ekin Tiu
+* Sidney Jaury  
+* Ekin Tiu | CS / AI @ Stanford University | https://www.linkedin.com/in/ekin-tiu-0aa467200/
 
 ## About iPresent
 ### Inspiration: 
