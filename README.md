@@ -8,17 +8,17 @@ Our predicament with remote learning doesn’t help. We scramble to pull up our 
 
 At iPresent we aspire to *solve these problems.* 
 
-Instead of practicing your speech in isolation, iPresent offers an anxiety-free alternative: present to an AI software. Not as intimidating now, right? Without having to present to your best friends, parents, or even 5-year old siblings, you can obtain high-quality, data-driven feedback to help you analyze your habits and improve. 
+Instead of practicing your speech in isolation, iPresent offers an anxiety-free alternative: *present to an AI software.* Not as intimidating now, right? Without having to present to your best friends, parents, or even 5-year old siblings, you can obtain high-quality, data-driven feedback to help you analyze your habits and improve. 
 
 Our mission is to help our users, be it anxious college students or professional speakers, gain useful AI-powered insights about their presentation patterns, and ultimately provide suggestions on how to improve, based on real psychological research-backed metrics. 
 
 ### What it does: 
-We wanted to design a platform that would lessen the ‘intimidation factor’ of public speaking, by providing both a real-time presentation simulator and a suite of algorithms to critically evaluate your presentation content (transcript), audio, and even facial expressions. 
+We wanted to design a platform that would lessen the ‘intimidation factor’ of public speaking, by providing **both** a real-time presentation simulator **and** a suite of algorithms to critically evaluate your presentation content (transcript), audio, and even facial expressions. 
 
 You can use iPresent when you want to practice speaking in front of an audience before the main event, or you can use it to obtain a diverse range of presentation metrics and feedback. 
 
 ### How we built it: 
-One major component of our application is the set of algorithms, both classical and machine learning, that use either the audio, transcript, or video (next step) as training modalities to compute useful presentation metrics. 
+One major component of our application is the set of **algorithms,** both classical and machine learning, that use either the *audio, transcript, or video (next step)* as training modalities to compute useful presentation metrics. 
 
 Our approach was to systematically research metrics that are indicative of high-quality presenters, and design a means to compute each of them algorithmically. The metrics can be broken down into the following categories: rating classification, passion, brevity, cadence, diction, diversity of language, and engagement. Below, we break down how we calculate each metric. 
 
@@ -26,38 +26,42 @@ Our approach was to systematically research metrics that are indicative of high-
 
 For most of us, when we think of speeches, TED Talks are our ‘go-to’. 
 
-Our approach utilizes the voluminous, information rich TED Talk Dataset from Kaggle containing transcripts from past speeches in order to implement a multi-label classification algorithm to process transcripts and output ratings such as 'Beautiful', 'Confusing', 'Courageous', 'Funny', 'Informative', 'Ingenious', 'Inspiring', 'Longwinded', 'Unconvincing', 'Fascinating', 'Jaw-dropping', 'Persuasive', 'OK', 'Obnoxious'. 
+Our approach utilizes the voluminous, information rich TED Talk Dataset from Kaggle containing transcripts from past speeches in order to implement a **multi-label classification algorithm** to process transcripts and output ratings such as 'Beautiful', 'Confusing', 'Courageous', 'Funny', 'Informative', 'Ingenious', 'Inspiring', 'Longwinded', 'Unconvincing', 'Fascinating', 'Jaw-dropping', 'Persuasive', 'OK', 'Obnoxious'. 
 
 The pipeline is defined as such: 
-* For each transcript, use the Word2Vec algorithm (pre-trained model from gensim), to convert each word in the transcript to a 300-feature vector . 
+* For each transcript, use the Word2Vec algorithm (pre-trained model from gensim), to convert each word in the transcript to a **300-feature vector** . 
 * We average these vectors in the axis of the number of words in order to get one 300-vector to represent the entire transcript. 
 * We parse the dataset to obtain clean rating labels for each of our transcripts. We set the top-4 ratings as one, and the rest are zero. 
 * Last but not least, we train the model using this engineered dataset, and evaluate on test data to obtain a top-k categorical accuracy of ~0.85. 
 
 **Passion/Urgency:** Are you passionate about your words, or are you putting your audience to sleep?  
-For this category, we develop algorithms to analyze each of the data modalities. 
+
+For this category, we develop algorithms to *analyze each of the data modalities.* 
 
 We use Google Cloud’s Sentiment Analysis API to determine a sentiment score and magnitude for the entire transcript. 
 
-We also train a convolutional neural network to classify snippets of audio as either neutral, or passionate/expressive. We used the Ryerson Audio-Visual Database of Emotional Speech and Song (RAVDESS) dataset from Kaggle to classify the emotional intensity, or the lack thereof (monotony) of audio files by transforming audio wav files into spectrograms, which are then used to train two CNNs. 
+We also train a **convolutional neural network** to classify snippets of audio as either neutral, or passionate/expressive. We used the Ryerson Audio-Visual Database of Emotional Speech and Song (RAVDESS) dataset from Kaggle to classify the emotional intensity, or the lack thereof (monotony) of audio files by transforming audio wav files into spectrograms, which are then used to train two CNNs. 
 
 Lastly, we used the facial expression dataset on Kaggle to train a CNN to classify neutral or expressive facial expressions. The algorithm is applied to the user’s mp4 file to help them improve their expression of enthusiasm for their speeches. 
 
-Brevity: 
+**Brevity:**
+
 The question we try to answer here is, “How many unnecessary filler words or phrases are you using?” 
 
-We compute a metric for brevity by creating two master lists containing sets of phrases or words that are commonly known in the english language as filler words. Using these lists, we iterate through the AI-generated transcript, and count the number of usages of each phrase. 
+We compute a metric for brevity by creating two master lists containing sets of phrases or words that are commonly known in the english language as filler words. Using these lists, we iterate through the AI-generated **transcript,** and count the number of usages of each phrase. 
 
 **Cadence: How fast are you speaking? **
+
 We compute cadence by measuring the words / minute. Using the outputs from the Google Cloud Speech-to-Text API (abv. As GCST), we calculate both the number of words, and manually compute the duration of the audio file using GCST’s timestamps. 
 
 We also calculate the number of pauses throughout the speech based on the per-word time outputs from the GCST. On average, we speak one word in 0.5 seconds. We compute the amount of time it takes for the user to say one word. If it’s greater than our predefined threshold, we classify it as a pause. 
 
 **Diction: How comprehensible is your speech?**
+
 We simply use GCST’s confidence metric for quantifying the interpretability of your speech. 
 
 Focus/Engagement: Are you maintaining eye contact, even with your virtual audience? 
-Our team uses the following GitHub repository as a starting point for our Gaze Tracking algorithm. After cloning this repo, we add more gaze classifications such as “looking up” and “looking down” and tweak some thresholds. 
+Our team uses the following GitHub repository (https://github.com/antoinelame/GazeTracking) as a starting point for our Gaze Tracking algorithm. After cloning this repo, we add more gaze classifications such as “looking up” and “looking down” and tweak some thresholds. 
 
 We split the mp4 file into sizable chunks, each chunk an image that is fed into the GazeTracker. Thus, we obtain a gaze classification at each second in the presentation, so that the user can see how often their eyes drift away from the screen. 
 
