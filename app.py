@@ -46,7 +46,7 @@ def results():
         hedging_phrase_counts, hedging_all_counts = algorithms.count_phrases(transcript, hedging_language)
         
         #cadence
-        wpm = algorithms.cadence(words)
+        wpm = int(algorithms.cadence(words))
         #common words
         #common_words = algorithms.vocabulary(transcript)
         common_words = {
@@ -71,14 +71,14 @@ def results():
         sentiment_score, sentiment_magnitude = algorithms.sample_analyze_sentiment(transcript)
         #AI impression (JSON)
         #ai_impression = algorithms.ai_impression(transcript, wv)
-        ai_impression = "Beautiful"
+        ai_impression = "inspiring"
         #expressiveness
         #emote_stats = algorithms.perform_audio_analysis(bucket_name, blob_name)
         emote_stats = {'Neutral': 0.7777777777777778, 'Passionate': 0.2222222222222222}
 
 
         ### DELETE AUDIO FILE ###
-        #delete_blob(bucket_name, blob_name)
+        delete_blob(bucket_name, blob_name)
 
         return render_template("metrics.html", clarity=clarity, brevity=filler_all_counts+hedging_all_counts, wpm=wpm*60, common_words=common_words, common_1=common_1, common_1_count=common_1_count, common_2=common_2, common_2_count=common_2_count, common_3=common_3, common_3_count=common_3_count, common_4=common_4, common_4_count=common_4_count, sentiment_score=sentiment_score, sentiment_magnitude=sentiment_magnitude, ai_impression=ai_impression, expressiveness=emote_stats.get("Passionate"))
     

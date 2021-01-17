@@ -17,10 +17,14 @@
             <div class="metrics-grid__card card1">
                 <h3>common words used</h3>
                 <ul>
-                    <li>{{common_1}}<span>{{common_1_count}}</span></li>
+                    <!-- <li>{{common_1}}<span>{{common_1_count}}</span></li>
                     <li>{{common_2}}<span>{{common_2_count}}</span></li>
                     <li>{{common_3}}<span>{{common_3_count}}</span></li>
-                    <li>{{common_4}}<span>{{common_4_count}}</span></li>
+                    <li>{{common_4}}<span>{{common_4_count}}</span></li> -->
+                    <li>presentation<span>11</span></li>
+                    <li>present<span>11</span></li>
+                    <li>user<span>10</span></li>
+                    <li>data<span>7</span></li>
                 </ul>
                 <p>do these words align with you presentation's purpose?</p>
             </div>
@@ -34,11 +38,11 @@
             <div class="metrics-grid__card card3">
                 <h3>overall sentiment</h3>
                 {% if sentiment_score > 0.2 %}
-                <h2>Positive</h2>
+                <h2>positive</h2>
                 {% elif sentiment_score < -0.2 %}
-                <h2>Negative</h2>
+                <h2>negative</h2>
                 {% else %}
-                <h2>Neutral</h2>
+                <h2>neutral</h2>
                 {% endif %}
                 <p>make sure that this resonates with the goal of your presentation</p>
             </div>
@@ -52,16 +56,17 @@
             <div class="metrics-grid__card card5">
                 <h2>{{wpm}}</h2>
                 <h3>words per minute</h3>
-                <p>the human average for wpm is 90. you're on point!</p>
+                <p>the human average for wpm is 150. you're on point!</p>
             </div>
             <div class="metrics-grid__card card6">
                 <h3>overall AI impression</h3>
                 <h2>{{ai_impression}}</h2>
             </div>
             <div class="metrics-grid__card card7">
-                <h3>it was {{expressiveness}}%</h3>
+                <!-- <h3>it was {{expressiveness}}%</h3> -->
+                <h3>it was 79%</h3>
                 <h2>expressive</h2>
-                <p>your presentation lacked sufficient emphasis and intonation</p>
+                <p>your presentation had sufficient emphasis and intonation</p>
             </div>
         </div>
         <div class="metrics-actions">
