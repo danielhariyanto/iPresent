@@ -37,21 +37,30 @@ def results():
     #transcript
     transcript = result.transcript
     #clarity
-    clarity = result.confidence
+    clarity = int(round(result.confidence, 2) * 100)
     #brevity
     filler_phrase_counts, filler_all_counts = algorithms.count_phrases(transcript, filler_words)
     hedging_phrase_counts, hedging_all_counts = algorithms.count_phrases(transcript, hedging_language)
     #cadence
     total_time, pace = algorithms.cadence(words)
+    pace = int(pace)
     #seconds / word
     word_times = algorithms.seconds_per_word(words, verbose=True)
-
+    #sentiment
+    sentiment = "negative"
+    magnitude = int(round(0.67888, 2) * 100)
+    #ai impression
+    impression = "beautiful"
+    #common words
+    common_1 = "their"
+    common_2 = "gone"
+    common_3 = "present"
 
     ### DELETE AUDIO FILE ###
-    delete_blob(bucket_name, blob_name)
+    #delete_blob(bucket_name, blob_name)
 
     
-    return render_template("metrics.html", clarity=clarity, phrase_counts=filler_all_counts+hedging_all_counts, pace=pace)
+    return render_template("metrics.html", sentiment=sentiment, megnitude=magnitude, impression=impression, clarity=clarity, brevity=filler_all_counts+hedging_all_counts, cadence=pace, common_1=common_1, common_2=common_2, common_3=common_3)
 
 
 def delete_blob(bucket_name, blob_name):
