@@ -118,6 +118,7 @@ We then decided to analyze audio with a CNN, based on previous audio processing 
 * After this Hackathon, our team feels very comfortable dealing with different types of data, ranging from audio files to text data. During the hackathon, we had the opportunity to practice feature engineering, normalization, train-test-split, and other common data preprocessing techniques. 
 * We learned about how audio files can be transformed into interpretable representations, and how certain features can be extracted from audio wav files. We then learned that we could use these representations to train a Convolutional Neural Network to perform our intended binary classification task of neutral vs. expressive. 
 * We learned more about the Word2Vec algorithm, and how Natural Language Processing techniques can be used to represent large chunks of text such as TED Talks into compressed feature vector representations used to train a model with high performance. 
+* Learned how to use Google Cloud Storage and implement the pipeline from front-end
  
 ### What's next for iPresent: 
 
