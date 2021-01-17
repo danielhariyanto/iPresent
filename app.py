@@ -2,6 +2,8 @@ from flask import Flask, render_template, url_for, request, redirect
 from google.cloud import storage
 import algorithms
 from data import filler_words, hedging_language
+import gensim.downloader as api
+from heapq import nlargest
 
 
 app = Flask(__name__)
@@ -25,34 +27,67 @@ def upload():
 
 @app.route('/results', methods=['GET'])
 def results():
-    bucket_name = request.args.get("bucket")
-    blob_name = request.args.get("key")
+    #try:
+        bucket_name = request.args.get("bucket")
+        blob_name = request.args.get("key")
 
-    gcs_uri = "gs://"+bucket_name+"/"+blob_name
+        gcs_uri = "gs://"+bucket_name+"/"+blob_name
 
-    #algorithms go here
-    #speech-to-text
-    result = algorithms.transcribe_gcs(gcs_uri)
-    words = result.words
-    #transcript
-    transcript = result.transcript
-    #clarity
-    clarity = result.confidence
-    #brevity
-    filler_phrase_counts, filler_all_counts = algorithms.count_phrases(transcript, filler_words)
-    hedging_phrase_counts, hedging_all_counts = algorithms.count_phrases(transcript, hedging_language)
-    #cadence
-    total_time, pace = algorithms.cadence(words)
-    #seconds / word
-    word_times = algorithms.seconds_per_word(words, verbose=True)
+        #algorithms go here
+        #speech-to-text
+        result = algorithms.transcribe_gcs(gcs_uri)
+        words = result.words
+        #transcript
+        transcript = result.transcript
+        #clarity
+        clarity = int(round(result.confidence, 2) * 100)
+        #brevity
+        filler_phrase_counts, filler_all_counts = algorithms.count_phrases(transcript, filler_words)
+        hedging_phrase_counts, hedging_all_counts = algorithms.count_phrases(transcript, hedging_language)
+        
+        #cadence
+        wpm = int(algorithms.cadence(words))
+        #common words
+        #common_words = algorithms.vocabulary(transcript)
+        common_words = {
+            "common_1": "first",
+            "common_1_count": 8,
+            "common_2": "second",
+            "common_2_count": 5,
+            "common_3": "third",
+            "common_3_count": 3,
+            "common_4": "fourth",
+            "common_4_count": 2
+        }
+        common_1 = common_words["common_1"]
+        common_1_count = common_words["common_1_count"]
+        common_2 = common_words["common_2"]
+        common_2_count = common_words["common_2_count"]
+        common_3 = common_words["common_3"]
+        common_3_count = common_words["common_3_count"]
+        common_4 = common_words["common_4"]
+        common_4_count = common_words["common_4_count"]
+        #sentiment analysis
+        sentiment_score, sentiment_magnitude = algorithms.sample_analyze_sentiment(transcript)
+        #AI impression (JSON)
+        #ai_impression = algorithms.ai_impression(transcript, wv)
+        ai_impression = "inspiring"
+        #expressiveness
+        #emote_stats = algorithms.perform_audio_analysis(bucket_name, blob_name)
+        emote_stats = {'Neutral': 0.7777777777777778, 'Passionate': 0.2222222222222222}
 
 
-    ### DELETE AUDIO FILE ###
-    delete_blob(bucket_name, blob_name)
+        ### DELETE AUDIO FILE ###
+        delete_blob(bucket_name, blob_name)
 
+        return render_template("metrics.html", clarity=clarity, brevity=filler_all_counts+hedging_all_counts, wpm=wpm*60, common_words=common_words, common_1=common_1, common_1_count=common_1_count, common_2=common_2, common_2_count=common_2_count, common_3=common_3, common_3_count=common_3_count, common_4=common_4, common_4_count=common_4_count, sentiment_score=sentiment_score, sentiment_magnitude=sentiment_magnitude, ai_impression=ai_impression, expressiveness=emote_stats.get("Passionate"))
     
-    return render_template("metrics.html", clarity=clarity, phrase_counts=filler_all_counts+hedging_all_counts, pace=pace)
+    #except:
+        #return render_template("404.html")
 
+def load_model():
+    global wv
+    wv = api.load('word2vec-google-news-300')
 
 def delete_blob(bucket_name, blob_name):
     """Deletes a blob from the bucket after algorithms"""
@@ -66,4 +101,5 @@ def delete_blob(bucket_name, blob_name):
 
 
 if __name__ == "__main__":
+    #load_model()
     app.run(debug=True)
