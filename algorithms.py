@@ -37,7 +37,7 @@ from librosa import feature
 import soundfile as sf
 import io
 
-import operator
+import asyncio
 
 
 def transcribe_gcs(gcs_uri):
@@ -145,7 +145,7 @@ dicts representing scores for each sentence in the document.
 Args:
     text_content The text content to analyze
 """
-def sample_analyze_sentiment(text_content):
+async def sample_analyze_sentiment(text_content):
     client = language_v1.LanguageServiceClient()
 
     # Available types: PLAIN_TEXT, HTML
@@ -174,9 +174,7 @@ def create_embedding(transcript, wv):
 #     print(transcript)
     X = []
     found_words = []
-    transcript = clean(transcript) # remove any punctuation
-    
-    print(transcript)
+
     words = transcript.split()
     for word in words: 
         try:
@@ -195,8 +193,7 @@ def create_embedding(transcript, wv):
     return X
 
 
-def ai_impression(transcript, wv):
-    wv = load_wv()
+async def ai_impression(transcript, wv):
     embedding = create_embedding(transcript, wv)
 
     model_filepath = './static/models/ted_analysis_model'
@@ -209,7 +206,7 @@ def ai_impression(transcript, wv):
     for val, col in zip(pred, cols):
         ted_dict[col] = val
     
-    word_result = max(stats.iteritems(), key=operator.itemgetter(1))[0]
+    word_result = max(ted_dict, key=ted_dict.get)
 
     return word_result
 
@@ -263,8 +260,7 @@ def get_intensity_analysis(emotion_intensity):
     percentages = {'Neutral': sums[0] / total, 'Passionate': sums[1] / total}
     return emotions, percentages
 
-def perform_audio_analysis(bucket_name, filename):
-    audio_model_filepath = './static/models/audio_analysis_model'
+async def perform_audio_analysis(bucket_name, filename):
     emotion_intensity_model_filepath = './static/models/emotion_intensity_model'
 
     # Create a Cloud Storage client.
@@ -275,10 +271,9 @@ def perform_audio_analysis(bucket_name, filename):
     aud, y, sr = read_wav(bucket, filename)
     
     # Convert into spectrogram
-    spectrogram = get_spectrogram(y[:, 0], sr)
+    spectrogram = get_spectrogram(y, sr)
     
     # Load models
-    audio_model = tf.keras.models.load_model(audio_model_filepath)
     emotion_intensity_model = tf.keras.models.load_model(emotion_intensity_model_filepath)
     
     # Break into time-based chunks, every ~3 seconds 
@@ -291,7 +286,6 @@ def perform_audio_analysis(bucket_name, filename):
     sound_chunks = np.expand_dims(sound_chunks, axis=-1)
     
     # Make predictions
-    audio_analysis = audio_model.predict(sound_chunks)
     emotion_intensity = emotion_intensity_model.predict(sound_chunks)
 
     emotions, emotion_percentages = get_intensity_analysis(emotion_intensity)
