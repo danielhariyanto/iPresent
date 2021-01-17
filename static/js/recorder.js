@@ -23,7 +23,6 @@ let isPaused = false;
 let totalSeconds = 0;
 
 function startRecording() {
-    console.log("recordButton clicked");
     setInterval(incrementDuration, 1000);
     document.querySelector('.present-header').innerHTML = 'you got this!'
     recording = true;
@@ -51,7 +50,6 @@ function startRecording() {
     */
 
     navigator.mediaDevices.getUserMedia(constraints).then(function (stream) {
-        console.log("getUserMedia() success, stream created, initializing Recorder.js ...");
 
         /*
             create an audio context after getUserMedia is called
@@ -78,9 +76,6 @@ function startRecording() {
 
         //start the recording process
         rec.record()
-
-        console.log("Recording started");
-
     }).catch(function (err) {
         //enable the record button if getUserMedia() fails
         recordButton.disabled = false;
@@ -90,7 +85,6 @@ function startRecording() {
 }
 
 function pauseRecording() {
-    console.log("pauseButton clicked rec.recording=", rec.recording);
     isPaused = !isPaused;
     if (rec.recording) {
         //pause
@@ -107,8 +101,6 @@ function pauseRecording() {
 }
 
 function stopRecording() {
-    console.log("stopButton clicked");
-
     //disable the stop button, enable the record too allow for new recordings
     stopButton.disabled = true;
     pauseButton.disabled = true;
@@ -134,9 +126,9 @@ function incrementDuration() {
             secondsLabel = `${totalSeconds % 60}`
         }
         if (Math.floor(totalSeconds / 60) < 10) {
-            minutesLabel = `0${Math.floor(totalSeconds / 60) / 10}`;
+            minutesLabel = `0${Math.floor(totalSeconds / 60)}`;
         } else {
-            minutesLabel = `${Math.floor(totalSeconds / 60) < 10}`
+            minutesLabel = `${Math.floor(totalSeconds / 60)}`
         }
         durationLabel.innerHTML = `<h2>${minutesLabel}:${secondsLabel}</h2>`;
     }
