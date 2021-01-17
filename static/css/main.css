@@ -87,6 +87,10 @@ a {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -106,6 +110,77 @@ a {
   right: 20px;
 }
 
+.window .circle:nth-of-type(1) {
+  right: 60px;
+}
+
+.window__actions {
+  margin-top: 20px;
+  width: 60%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.window__actions > div {
+  width: 80%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.window__actions > div h3 {
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.window__actions > div:last-of-type {
+  margin-left: 30px;
+}
+
+.window__actions > div .join-button {
+  height: 80px;
+  margin-top: 10px;
+  width: 90%;
+  text-align: center;
+  font-size: 1.1rem;
+  margin-left: 0;
+}
+
+.window__actions > div .join {
+  padding-top: 20px;
+  font-size: 1.2rem;
+}
+
+.window__actions > div .upload {
+  background-color: #171717;
+  color: #d66fd8;
+  border: 4px solid #d66fd8;
+}
+
+.window__actions > div .upload:hover {
+  background-color: #d66fd8;
+  color: #171717;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+}
+
 .landing-img {
   position: absolute;
   bottom: -65%;
@@ -117,7 +192,7 @@ a {
 .join-button {
   margin-left: 20px;
   background-color: #d66fd8;
-  padding: 15px 20px 20px 20px;
+  padding: 15px 15px 15px 20px;
   border-radius: 30px;
   font-size: 1rem;
   line-height: 110%;
@@ -147,11 +222,11 @@ a {
   position: relative;
 }
 
-.present > img {
+.present .logo {
   position: absolute;
-  width: 40vw;
-  left: -300px;
-  bottom: -150px;
+  height: 60px;
+  left: 5vw;
+  top: 10vh;
 }
 
 .present h1 {
