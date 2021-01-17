@@ -6,9 +6,9 @@
 https://www.youtube.com/watch?v=QQAM0No8Ou4&feature=youtu.be
 
 ## About Us
-* Daniel Hariyanto
-* Meshach Adoe
-* Sidney Jaury  
+* Daniel Hariyanto | CS & Biophysics at Brandeis University '23 | https://www.linkedin.com/in/danielhariyanto/
+* Meshach Adoe | Graphic Artist at AS Graphic Studio | https://www.linkedin.com/in/meshach-adoe-0a133719a/
+* Sidney Jaury | Entrepreneurship at Babson College | https://www.linkedin.com/in/sidneyjaury/
 * Ekin Tiu | CS / AI @ Stanford University | https://www.linkedin.com/in/ekin-tiu-0aa467200/
 
 ## About iPresent
