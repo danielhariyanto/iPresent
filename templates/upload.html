@@ -25,11 +25,11 @@
         window.onload = function addFileName() {
             document.getElementsByName("key")[0].setAttribute("value", filename);
         }
-        const loader = '<div class="loader"></div>'
-        document.getElementById("form-submit").addEventListener('onclick', function(){
+        var loader = '<div class="loader"></div>'
+        document.getElementById("form-submit").onclick = function(){
             console.log("clicked");
             document.querySelector('.upload').insertAdjacentHTML('beforeend', loader);
-        })
+        };
     </script>
 </body>
 </html>
