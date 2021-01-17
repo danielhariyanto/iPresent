@@ -1,5 +1,7 @@
 # iPresent
 
+## Your own AI-powered presentation simulator and evaulator
+
 ![alt text](https://github.com/danielhariyanto/iPresent/blob/main/figures/main_page.PNG)
 
 ## Pitch Link
