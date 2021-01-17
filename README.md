@@ -31,7 +31,7 @@ You can use iPresent when you want to practice speaking in front of an audience 
 ### How we built it: 
 One major component of our application is the set of **algorithms,** both classical and machine learning, that use either the *audio, transcript, or video (next step)* as training modalities to compute useful presentation metrics. 
 
-![alt text](https://github.com/danielhariyanto/iPresent/blob/main/figures/pipeline.PNG)
+![alt text](https://github.com/danielhariyanto/iPresent/blob/main/figures/pipeline_new.PNG)
 
 Our approach was to systematically research metrics that are indicative of high-quality presenters, and design a means to compute each of them algorithmically. The metrics can be broken down into the following categories: rating classification, passion, brevity, cadence, diction, diversity of language, and engagement. Below, we break down how we calculate each metric. 
 
