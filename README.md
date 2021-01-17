@@ -1,5 +1,14 @@
 # iPresent
 
+## Pitch Link
+https://www.youtube.com/watch?v=QQAM0No8Ou4&feature=youtu.be
+
+## About Us
+* Daniel Hariyanto
+* Meshach Adoe
+* Sidney Jaury  
+* Ekin Tiu | CS / AI @ Stanford University | https://www.linkedin.com/in/ekin-tiu-0aa467200/
+
 ## About iPresent
 ### Inspiration: 
 As university students, presentations have become a hallmark of life. We spend countless hours perfecting our final speeches, anxiously awaiting the reactions and critiques of our audience. In that time, we practice speaking over and over again…to ourselves. 
