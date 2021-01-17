@@ -28,7 +28,7 @@ def upload():
 
 @app.route('/results', methods=['GET'])
 def results():
-    try:
+    #try:
         bucket_name = request.args.get("bucket")
         blob_name = request.args.get("key")
 
@@ -49,25 +49,15 @@ def results():
         #cadence
         wpm = int(algorithms.cadence(words))
         #common words
-        #common_words = algorithms.vocabulary(transcript)
-        common_words = {
-            "common_1": "first",
-            "common_1_count": 8,
-            "common_2": "second",
-            "common_2_count": 5,
-            "common_3": "third",
-            "common_3_count": 3,
-            "common_4": "fourth",
-            "common_4_count": 2
-        }
-        common_1 = common_words["common_1"]
-        common_1_count = common_words["common_1_count"]
-        common_2 = common_words["common_2"]
-        common_2_count = common_words["common_2_count"]
-        common_3 = common_words["common_3"]
-        common_3_count = common_words["common_3_count"]
-        common_4 = common_words["common_4"]
-        common_4_count = common_words["common_4_count"]
+        common_words = algorithms.perform_variety_analysis(transcript)
+        common_1 = common_words[0][0]
+        common_1_count = common_words[0][1]
+        common_2 = common_words[1][0]
+        common_2_count = common_words[1][1]
+        common_3 = common_words[2][0]
+        common_3_count = common_words[2][1]
+        common_4 = common_words[3][0]
+        common_4_count = common_words[3][1]
         #sentiment analysis
         sentiment_score, sentiment_magnitude = asyncio.run(algorithms.sample_analyze_sentiment(transcript))
         #AI impression (JSON)
@@ -81,8 +71,8 @@ def results():
 
         return render_template("metrics.html", clarity=clarity, brevity=filler_all_counts+hedging_all_counts, wpm=wpm*60, common_words=common_words, common_1=common_1, common_1_count=common_1_count, common_2=common_2, common_2_count=common_2_count, common_3=common_3, common_3_count=common_3_count, common_4=common_4, common_4_count=common_4_count, sentiment_score=sentiment_score, sentiment_magnitude=sentiment_magnitude, ai_impression=ai_impression, expressiveness=emote_stats[1].get("Passionate"))
     
-    except:
-        return render_template("404.html")
+    #except:
+        #return render_template("404.html")
 
 def load_model():
     global wv
