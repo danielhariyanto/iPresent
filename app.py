@@ -47,7 +47,7 @@ def results():
         hedging_phrase_counts, hedging_all_counts = algorithms.count_phrases(transcript, hedging_language)
         
         #cadence
-        wpm = algorithms.cadence(words)
+        wpm = int(algorithms.cadence(words))
         #common words
         #common_words = algorithms.vocabulary(transcript)
         common_words = {
