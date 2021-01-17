@@ -1,5 +1,11 @@
 # iPresent
 
+## About Us
+* Daniel Hariyanto
+* Meshach Adoe
+* Sidney Jaury 
+* Ekin Tiu
+
 ## About iPresent
 ### Inspiration: 
 As university students, presentations have become a hallmark of life. We spend countless hours perfecting our final speeches, anxiously awaiting the reactions and critiques of our audience. In that time, we practice speaking over and over again…to ourselves. 
