@@ -179,6 +179,23 @@ a {
 	}
 }
 
+.home-button {
+	margin-top: 20px;
+	background-color: $secondarycolor;
+	padding: 15px 20px 15px 20px;
+	border-radius: 20px;
+	font-size: 1rem;
+	line-height: 110%;
+	text-align: left;
+	color: $primarycolor;
+	font-size: 1.2rem;
+	font-weight: 700;
+	&:hover {
+		transition: background-color 0.2s;
+		background-color: $tertiarycolor;
+	}
+}
+
 .present {
 	display: flex;
 	flex-direction: column;
@@ -563,4 +580,14 @@ a {
 		$secondarycolor,
 		$tertiarycolor
 	);
+}
+
+.error {
+	h1 {
+		line-height: 100%;
+		margin-bottom: 15px;
+		text-align: center;
+		font-size: 1.8rem;
+		width: 60%;
+	}
 }
