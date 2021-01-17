@@ -1,12 +1,16 @@
 # iPresent
 
+## Your own AI-powered presentation simulator and evaulator
+
+![alt text](https://github.com/danielhariyanto/iPresent/blob/main/figures/main_page.PNG)
+
 ## Pitch Link
 https://www.youtube.com/watch?v=QQAM0No8Ou4&feature=youtu.be
 
 ## About Us
-* Daniel Hariyanto
-* Meshach Adoe
-* Sidney Jaury  
+* Daniel Hariyanto | CS & Biophysics at Brandeis University '23 | https://www.linkedin.com/in/danielhariyanto/
+* Meshach Adoe | Graphic Artist at AS Graphic Studio | https://www.linkedin.com/in/meshach-adoe-0a133719a/
+* Sidney Jaury | Entrepreneurship at Babson College | https://www.linkedin.com/in/sidneyjaury/
 * Ekin Tiu | CS / AI @ Stanford University | https://www.linkedin.com/in/ekin-tiu-0aa467200/
 
 ## About iPresent
@@ -29,13 +33,17 @@ You can use iPresent when you want to practice speaking in front of an audience 
 ### How we built it: 
 One major component of our application is the set of **algorithms,** both classical and machine learning, that use either the *audio, transcript, or video (next step)* as training modalities to compute useful presentation metrics. 
 
+![alt text](https://github.com/danielhariyanto/iPresent/blob/main/figures/pipeline_new.PNG)
+
 Our approach was to systematically research metrics that are indicative of high-quality presenters, and design a means to compute each of them algorithmically. The metrics can be broken down into the following categories: rating classification, passion, brevity, cadence, diction, diversity of language, and engagement. Below, we break down how we calculate each metric. 
 
-**Rating Classification: TED Talk Model**
+#### **Rating Classification: TED Talk Model**
 
 For most of us, when we think of speeches, TED Talks are our ‘go-to’. 
 
 Our approach utilizes the voluminous, information rich TED Talk Dataset from Kaggle containing transcripts from past speeches in order to implement a **multi-label classification algorithm** to process transcripts and output ratings such as 'Beautiful', 'Confusing', 'Courageous', 'Funny', 'Informative', 'Ingenious', 'Inspiring', 'Longwinded', 'Unconvincing', 'Fascinating', 'Jaw-dropping', 'Persuasive', 'OK', 'Obnoxious'. 
+
+![alt text](https://github.com/danielhariyanto/iPresent/blob/main/figures/TED.PNG)
 
 The pipeline is defined as such: 
 * For each transcript, use the Word2Vec algorithm (pre-trained model from gensim), to convert each word in the transcript to a **300-feature vector** . 
@@ -43,7 +51,7 @@ The pipeline is defined as such:
 * We parse the dataset to obtain clean rating labels for each of our transcripts. We set the top-4 ratings as one, and the rest are zero. 
 * Last but not least, we train the model using this engineered dataset, and evaluate on test data to obtain a top-k categorical accuracy of ~0.85. 
 
-**Passion/Urgency:** Are you passionate about your words, or are you putting your audience to sleep?  
+#### **Passion/Urgency:** Are you passionate about your words, or are you putting your audience to sleep?  
 
 For this category, we develop algorithms to *analyze each of the data modalities.* 
 
@@ -51,21 +59,25 @@ We use Google Cloud’s Sentiment Analysis API to determine a sentiment score an
 
 We also train a **convolutional neural network** to classify snippets of audio as either neutral, or passionate/expressive. We used the Ryerson Audio-Visual Database of Emotional Speech and Song (RAVDESS) dataset from Kaggle to classify the emotional intensity, or the lack thereof (monotony) of audio files by transforming audio wav files into spectrograms, which are then used to train two CNNs. 
 
+![alt text](https://github.com/danielhariyanto/iPresent/blob/main/figures/audio.PNG)
+
 Lastly, we used the facial expression dataset on Kaggle to train a CNN to classify neutral or expressive facial expressions. The algorithm is applied to the user’s mp4 file to help them improve their expression of enthusiasm for their speeches. 
 
-**Brevity:**
+![alt text](https://github.com/danielhariyanto/iPresent/blob/main/figures/facial.PNG)
+
+### **Brevity:**
 
 The question we try to answer here is, “How many unnecessary filler words or phrases are you using?” 
 
 We compute a metric for brevity by creating two master lists containing sets of phrases or words that are commonly known in the english language as filler words. Using these lists, we iterate through the AI-generated **transcript,** and count the number of usages of each phrase. 
 
-**Cadence: How fast are you speaking?**
+#### **Cadence: How fast are you speaking?**
 
 We compute cadence by measuring the words / minute. Using the outputs from the Google Cloud Speech-to-Text API (abv. As GCST), we calculate both the number of words, and manually compute the duration of the audio file using GCST’s timestamps. 
 
 We also calculate the number of pauses throughout the speech based on the per-word time outputs from the GCST. On average, we speak one word in 0.5 seconds. We compute the amount of time it takes for the user to say one word. If it’s greater than our predefined threshold, we classify it as a pause. 
 
-**Diction: How comprehensible is your speech?**
+#### **Diction: How comprehensible is your speech?**
 
 We simply use GCST’s confidence metric for quantifying the interpretability of your speech. 
 
@@ -95,17 +107,18 @@ We ran this through a Dense neural network, but achieved low performance (around
 
 We then decided to analyze audio with a CNN, based on previous audio processing literature. This increased our performance substantially to an AUROC of ~0.79 on the binary classification task. 
 
-### Accomplishments that I'm proud of: 
+### Accomplishments that we're proud of: 
 * Trained three machine learning models (essentially three separate mini-projects) on three completely different modalities in such a short period of time, while having to familiarize ourselves with three different datasets. 
 * Our models performed very well, overall. 
 * Created a diverse suite of research-backed metrics that can be used to help our users analyze and improve their presentation skills
 * Implemented these models and algorithms into a meticulously designed web-based platform. 
 * Developed a visually appealing, interactive, and intuitive user interface to make the presentation simulations easy to use. 
 
-### What I learned: 
+### What we learned: 
 * After this Hackathon, our team feels very comfortable dealing with different types of data, ranging from audio files to text data. During the hackathon, we had the opportunity to practice feature engineering, normalization, train-test-split, and other common data preprocessing techniques. 
 * We learned about how audio files can be transformed into interpretable representations, and how certain features can be extracted from audio wav files. We then learned that we could use these representations to train a Convolutional Neural Network to perform our intended binary classification task of neutral vs. expressive. 
 * We learned more about the Word2Vec algorithm, and how Natural Language Processing techniques can be used to represent large chunks of text such as TED Talks into compressed feature vector representations used to train a model with high performance. 
+* Learned how to use Google Cloud Storage and implement the pipeline from front-end
  
 ### What's next for iPresent: 
 
