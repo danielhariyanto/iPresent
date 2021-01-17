@@ -4,6 +4,7 @@ import algorithms
 from data import filler_words, hedging_language
 import gensim.downloader as api
 from heapq import nlargest
+import asyncio
 
 
 app = Flask(__name__)
@@ -27,7 +28,7 @@ def upload():
 
 @app.route('/results', methods=['GET'])
 def results():
-    #try:
+    try:
         bucket_name = request.args.get("bucket")
         blob_name = request.args.get("key")
 
@@ -68,22 +69,20 @@ def results():
         common_4 = common_words["common_4"]
         common_4_count = common_words["common_4_count"]
         #sentiment analysis
-        sentiment_score, sentiment_magnitude = algorithms.sample_analyze_sentiment(transcript)
+        sentiment_score, sentiment_magnitude = asyncio.run(algorithms.sample_analyze_sentiment(transcript))
         #AI impression (JSON)
-        #ai_impression = algorithms.ai_impression(transcript, wv)
-        ai_impression = "Beautiful"
+        ai_impression = asyncio.run(algorithms.ai_impression(transcript, wv))
         #expressiveness
-        #emote_stats = algorithms.perform_audio_analysis(bucket_name, blob_name)
-        emote_stats = {'Neutral': 0.7777777777777778, 'Passionate': 0.2222222222222222}
+        emote_stats = asyncio.run(algorithms.perform_audio_analysis(bucket_name, blob_name))
 
 
         ### DELETE AUDIO FILE ###
-        #delete_blob(bucket_name, blob_name)
+        delete_blob(bucket_name, blob_name)
 
-        return render_template("metrics.html", clarity=clarity, brevity=filler_all_counts+hedging_all_counts, wpm=wpm*60, common_words=common_words, common_1=common_1, common_1_count=common_1_count, common_2=common_2, common_2_count=common_2_count, common_3=common_3, common_3_count=common_3_count, common_4=common_4, common_4_count=common_4_count, sentiment_score=sentiment_score, sentiment_magnitude=sentiment_magnitude, ai_impression=ai_impression, expressiveness=emote_stats.get("Passionate"))
+        return render_template("metrics.html", clarity=clarity, brevity=filler_all_counts+hedging_all_counts, wpm=wpm*60, common_words=common_words, common_1=common_1, common_1_count=common_1_count, common_2=common_2, common_2_count=common_2_count, common_3=common_3, common_3_count=common_3_count, common_4=common_4, common_4_count=common_4_count, sentiment_score=sentiment_score, sentiment_magnitude=sentiment_magnitude, ai_impression=ai_impression, expressiveness=emote_stats[1].get("Passionate"))
     
-    #except:
-        #return render_template("404.html")
+    except:
+        return render_template("404.html")
 
 def load_model():
     global wv
@@ -101,5 +100,5 @@ def delete_blob(bucket_name, blob_name):
 
 
 if __name__ == "__main__":
-    #load_model()
+    load_model()
     app.run(debug=True)
