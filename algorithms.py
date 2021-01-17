@@ -120,20 +120,6 @@ def cadence(words):
 
     return pace
 
-'''
-Common words
-'''
-def vocabulary(transcript):
-    nlp = spacy.load('en_core_web_sm')
-    doc = nlp(transcript)
-
-    noun_phrases = [chunk.text for chunk in doc.noun_chunks]
-    verb_phrases = [token.lemma_ for token in doc if token.pos_ == "VERB"]
-    adjectives = [token.lemma_ for token in doc if token.pos_ == "ADJ"]
-
-    print("Noun phrases:", [chunk.text for chunk in doc.noun_chunks])
-    print("Verbs:", [token.lemma_ for token in doc if token.pos_ == "VERB"])
-    print("Adjectives:", [token.lemma_ for token in doc if token.pos_ == "ADJ"])
 
 
 """
@@ -293,3 +279,35 @@ async def perform_audio_analysis(bucket_name, filename):
     # Classifies audio based on neutrality vs. strength (aka passion/intensity)
     emote_stats = (emotions, emotion_percentages)
     return emote_stats
+
+
+def count_repetitions(doc):
+    verb_phrases = [token.lemma_ for token in doc if token.pos_ == "VERB"]
+    adjectives = [token.lemma_ for token in doc if token.pos_ == "ADJ"]
+    
+    verb_phrases = np.array(verb_phrases)
+    adjectives = np.array(adjectives)
+    
+    unique_verbs, counts_verbs = np.unique(verb_phrases, return_counts=True)
+    verbs = dict(zip(unique_verbs, counts_verbs))
+    
+    unique_adj, counts_adj = np.unique(adjectives, return_counts=True)
+    adj = dict(zip(unique_adj, counts_adj))
+    
+    return verbs, adj
+
+'''
+This function calculates how often the presenter uses each verb or 
+adjective in order to determine their word choice variet. 
+'''
+def perform_variety_analysis(transcript):
+    nlp = spacy.load('en_core_web_sm')
+    lower_transcript = transcript.lower()
+    doc = nlp(lower_transcript)
+    
+    verbs, adj = count_repetitions(doc)
+    verbs.update(adj)
+
+    words = sorted(verbs.items(), key = lambda kv:(kv[1], kv[0]))
+    
+    return words
