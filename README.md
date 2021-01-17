@@ -1,5 +1,7 @@
 # iPresent
 
+![alt text](https://github.com/danielhariyanto/iPresent/blob/main/figures/main_page.PNG)
+
 ## Pitch Link
 https://www.youtube.com/watch?v=QQAM0No8Ou4&feature=youtu.be
 
