@@ -1,11 +1,18 @@
 # iPresent
 
-## Your own AI-powered presentation simulator and evaulator
+## Your own AI-powered presentation simulator and evaluator
 
 ![alt text](https://github.com/danielhariyanto/iPresent/blob/main/figures/main_page.PNG)
 
 ## Pitch Link
 https://www.youtube.com/watch?v=QQAM0No8Ou4&feature=youtu.be
+
+## To Run
+1. Contact us first for Google Cloud Auth: dthariyanto@gmail.com
+2. Download models from Google Drive link and store in './static/models/'
+3. In terminal, input:
+  * pip3 install -r requirements.txt
+  * python3 app.py
 
 ## About Us
 * Daniel Hariyanto | CS & Biophysics at Brandeis University '23 | https://www.linkedin.com/in/danielhariyanto/
