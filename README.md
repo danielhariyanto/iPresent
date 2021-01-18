@@ -11,8 +11,8 @@ https://www.youtube.com/watch?v=QQAM0No8Ou4&feature=youtu.be
 1. Contact us first for Google Cloud Auth: dthariyanto@gmail.com
 2. Download models from Google Drive link and store in './static/models/'
 3. In terminal, input:
-  1. pip3 install -r requirements.txt
-  2. python3 app.py
+    * pip3 install -r requirements.txt
+    * python3 app.py
 
 ## About Us
 * Daniel Hariyanto | CS & Biophysics at Brandeis University '23 | https://www.linkedin.com/in/danielhariyanto/
