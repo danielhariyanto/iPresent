@@ -3,7 +3,6 @@ from google.cloud import storage
 import algorithms
 from data import filler_words, hedging_language
 import gensim.downloader as api
-from heapq import nlargest
 import asyncio
 
 

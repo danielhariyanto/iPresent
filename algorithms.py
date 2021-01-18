@@ -3,40 +3,12 @@ from google.cloud import storage
 from google.cloud import language_v1
 
 import spacy
-
 import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sb
-
-from sklearn import preprocessing
-from sklearn.preprocessing import MinMaxScaler, StandardScaler
-from sklearn.preprocessing import LabelEncoder
-from sklearn.model_selection import train_test_split
-
 import tensorflow as tf
-from tensorflow.keras import Input
-from tensorflow.keras.models import Sequential, Model
-from tensorflow.keras.layers import Dense, LSTM, Reshape, Bidirectional
-from tensorflow.keras import backend as K
-
-from tqdm import tqdm
-
-import string
-import json 
-import re
-
-import pydub
-
 import IPython.display as ipd
-
 import librosa
-import librosa.display
-from librosa import feature
-
 import soundfile as sf
 import io
-
 import asyncio
 
 

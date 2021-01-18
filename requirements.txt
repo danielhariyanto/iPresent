@@ -1,0 +1,14 @@
+flask
+google-cloud-storage
+google-cloud-speech
+google-cloud-language
+gensim
+asyncio
+spacy
+numpy
+tensorflow
+IPython
+librosa
+soundfile
+io
+asyncio
