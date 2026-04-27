@@ -8,7 +8,7 @@
 https://www.youtube.com/watch?v=QQAM0No8Ou4&feature=youtu.be
 
 ## To Run
-1. Contact us first for Google Cloud Auth: REMOVED
+1. Contact us first for Google Cloud Auth via [LinkedIn](https://www.linkedin.com/in/danielhariyanto/)
 2. Download models from Google Drive link and store in './static/models/'
 3. In terminal, input:
     * pip3 install -r requirements.txt
